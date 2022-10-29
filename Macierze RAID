@@ -1,0 +1,154 @@
+RAID (Redundant Array of Independent Disks) - sposób wykorzystania w systemie komputerowym dwóch lub większej liczby dysków twardych, w którym dyski te współpracują pomiędzy sobą. 
+
+1. Rozwiązania typu RAID używane są w następujących celach:
+    
+    - zwiększenie niezawodności (odporność na awarie).
+    - zwiększenie wydajności transmisji danych.
+    - powiększenie przestrzeni dostępnej jako jedna całość.
+
+
+2. Rodzaje RAID:
+    - RAID 0
+    - RAID 1
+    - RAID 2
+    - RAID 3
+    - RAID 4
+    - RAID 5
+    - RAID 6
+    - RAID 0+1
+    - RAID 1+0
+
+
+3. RAID 0 
+
+    Polega na połączeniu ze sobą dwóch lub więcej dysków fizycznych tak, aby były widziane jako jeden dysk logiczny. 
+    Powstała w ten sposób przestrzeń ma rozmiar taki jak N x rozmiar najmniejszego z dysków, gdzie „N” oznacza liczbę dysków. 
+    Dane są przeplecione pomiędzy dyskami. Dzięki temu uzyskuje się znaczne przyspieszenie operacji zapisu i odczytu
+
+    Korzyści:
+        - przestrzeń wszystkich dysków jest widziana jako całość.
+        - przyspieszenie zapisu i odczytu w porównaniu do pojedynczego dysku.
+    
+    Wady:
+        - brak odporności na awarię dysków.
+        - zwiększenie awaryjności – awaria pojedynczego dysku powoduje utratę wolumenu, a szansa na awarię jednego z N dysków rośnie wraz z N.
+
+
+4. RAID 1
+
+    Polega na replikacji pracy dwóch lub więcej dysków fizycznych. Powstała przestrzeń ma rozmiar najmniejszego nośnika.
+
+    Korzyści:
+        - odporność na awarię N – 1 dysków przy N-dyskowej macierzy.
+        - możliwe zwiększenie szybkości odczytu.
+        - możliwe zmniejszenie czasu dostępu.
+
+    Wady:
+        - możliwa zmniejszona szybkość zapisu.
+        - utrata pojemności (całkowita pojemność jest taka jak pojemność najmniejszego dysku).
+
+
+5. RAID 2 
+
+    Dane na dyskach są paskowane. Zapis następuje po 1 bicie na pasek, czyli każdy kolejny bit znajduje się na innym dysku.
+    Rotacja talerzy wszystkich dysków macierzy musi być synchronizowana. Połączone dyski zachowują się jak jeden duży dysk. 
+    Dostępna pojemność to suma pojemności dysków przechowujących dane.
+
+    Korzyści:
+        - każdy dowolny dysk (zarówno z danymi, jak i z kodem Hamminga) może w razie uszkodzenia zostać odbudowany przez pozostałe dyski.
+    
+    Wady:
+        - konieczność dokładnej synchronizacji wszystkich dysków zawierających kod Hamminga (w przeciwnym wypadku dezorganizacja i całkowita nieprzydatność tych dysków);
+        - długotrwałe generowanie kodu Hamminga przekładające się na wolną pracę całego systemu.
+
+
+6. RAID 3
+
+    Dane składowane są na N-1 dyskach. Zapis następuje podobnie jak w RAID 2, lecz w tym przypadku po 1 bajcie na każdym kolejnym dysku.
+    Rotacja talerzy wszystkich dysków macierzy była zsynchronizowana. Ostatni dysk dedykowany jest do przechowywania sum kontrolnych.
+
+    Korzyści:
+        - odporność na awarię 1 dysku;
+        - zwiększona szybkość odczytu.
+
+    Wady:
+        - zmniejszona szybkość zapisu z powodu konieczności obliczenia sum kontrolnych (eliminowana poprzez zastosowanie sprzętowych kontrolerów RAID
+          w przypadku awarii dysku dostęp do danych jest spowolniony z powodu obliczeń sum kontrolnych.
+        - odbudowa macierzy po wymianie dysku jest operacją kosztowną obliczeniowo i powoduje spowolnienie operacji odczytu i zapisu.
+        - pojedynczy wydzielony dysk na sumy kontrolne zazwyczaj jest „wąskim gardłem” w wydajności całej macierzy.
+
+
+7. RAID 4
+
+    RAID 4 jest bardzo zbliżony do RAID 3 z tą różnicą, że dane są dzielone na bloki o wielkości np. 16, 32, 64 lub 128 kB. 
+    Takie bloki zapisywane są na dyskach podobnie do rozwiązania RAID 0. 
+    Dla każdego rzędu zapisywanych danych blok parzystości zapisywany jest na dedykowanym dysku parzystości.
+
+    Przy uszkodzeniu dysku dane mogą być odtworzone przez odpowiednie operacje matematyczne. 
+    Parametry RAID 4 są bardzo dobre dla sekwencyjnego zapisu i odczytu danych (operacje na bardzo dużych plikach).
+
+
+8. RAID 5
+
+    Poziom piąty pracuje bardzo podobnie do poziomu czwartego z tą różnicą, iż bity parzystości nie są zapisywane na specjalnie do tego przeznaczonym dysku, 
+    lecz są rozpraszane po całej strukturze macierzy. Macierz składa się z 3 lub więcej dysków. Przy macierzy liczącej N dysków jej pojemność wynosi N – 1 dysków.
+
+    Korzyści:
+        - odporność na awarię jednego dysku;
+        - zwiększona szybkość odczytu – porównywalna do macierzy RAID 0 złożonej z N-1 dysków.
+
+    Wady:
+        - zmniejszona szybkość zapisu z powodu konieczności obliczania sum kontrolnych (eliminowana poprzez zastosowanie sprzętowego kontrolera RAID 5).
+          w przypadku awarii dysku dostęp do danych jest spowolniony z powodu obliczeń danych na podstawie pozostałych danych i sum kontrolnych.
+        - odbudowa macierzy po wymianie dysku jest operacją kosztowną zarówno w sensie obliczeniowym, 
+        - jak i I/O, co powoduje spowolnienie operacji odczytu i zapisu. Wraz ze wzrostem pojemności pojedynczego dysku staje się to coraz większym problemem, 
+          gdyż rosnący czas odbudowy grupy RAID zwiększa ryzyko utraty danych w wyniku awarii kolejnego dysku w tym czasie.
+
+
+9. RAID 6 
+
+    Macierz z podwójną parzystością, realizowana np. jako 5+2, albo 13+2. 
+    Kosztowniejsza w implementacji niż RAID 5, ale dająca większą niezawodność. 
+    Awaria dwóch dowolnych dysków w tym samym czasie nie powoduje utraty danych.
+
+    Korzyści:
+        - odporność na awarię maksimum 2 dysków;
+        - szybkość pracy większa niż szybkość pojedynczego dysku.
+
+
+10. RAID 0+1
+
+    Macierz taka ma zarówno zalety macierzy RAID 0 – szybkość w operacjach zapisu i odczytu – jak i macierzy RAID 1 – zabezpieczenie danych w przypadku awarii pojedynczego dysku. 
+    Pojedyncza awaria dysku powoduje, że całość staje się w praktyce RAID 0. 
+    Potrzebne są minimum 4 dyski o tej samej pojemności.
+
+    Korzyści:
+        - szybkość macierzy RAID 0;
+        - zyskuje się dużą dowolność w kwestii wielkości dysków fizycznych składających się na dyski logiczne.
+        - znacznie prostsza w implementacji niż RAID 3, 5 i 6.
+
+    Wady:
+        - tworzona jest lustrzana kopia dysku logicznego – jeżeli awarii ulega jeden dysk fizyczny, cały dysk logiczny, który współtworzył zostaje wyłączony.
+        - większy koszt przechowywania danych niż w przypadku RAID 0, 2, 3, 4, 5, 6.
+
+
+11. RAID 1+0
+
+    Macierz realizowana jako RAID 0, którego elementami są macierze RAID 1.  
+    W porównaniu do swojego poprzednika (RAID 0+1) realizuje tę samą koncepcję połączenia zalet RAID 0 (szybkość) i RAID 1 (bezpieczeństwo), lecz w odmienny sposób.
+
+    Korzyści:
+        - szybkość macierzy RAID 0.
+        - klonowanie następuje na poziomie poszczególnych dysków fizycznych, a nie logicznych. Awaria jednego dysku powoduje wyłączenie jedynie tego dysku, a nie całego dysku logicznego, jak to się dzieje w RAID 0+1.
+        - w szczególnym przypadku przetrwa awarię N – 1 dysków (N – liczba dysków fizycznych mirrorów) z każdego mirrora składającego się na RAID 0.
+        - znacznie prostsza w implementacji niż RAID 3, 5 i 6.
+
+    Wady:
+        - RAID 1 powinien łączyć dyski o tej samej wielkości a najlepiej i szybkości zapisu. W przeciwnym wypadku uzyskuje się mirror o pojemności najmniejszego dysku i szybkości zapisu najwolniejszego. Znacząco potrafi to zwiększyć koszty w porównaniu do RAID 0+1.
+        - większy koszt przechowywania danych niż w przypadku RAID 0, 2, 3, 4, 5, 6. Współczynnik nadmiarowości wynosi tu 100% (potrzebne są 2 GB przestrzeni dyskowej na zapisanie 1 GB danych).
+
+
+12. Niestandardowe poziomy RAID
+
+    - RAID 5E, 5EE
+    - RAID 6E, 6EE (RAID 6 z rozproszonym dyskiem hot spare)
