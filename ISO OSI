@@ -1,0 +1,25 @@
+Różnice między protokołem IPv6 a IPv4
+
+IPv4 {
+    długość adresów: 32 bity
+    identyfikacja ruchu dla QoS: tak (ToS)
+    fragmentacja: przez nadającego hosta i routery
+    suma kontrolna w nagłówku: tak
+    ramki zgłoszeń: ARP
+    zarządzania grupami multicastowymi: IGMP (Internet Group Management Protocol) - jeden z rodziny protokołów TCP/IP, służący do zarządzania grupami multicastowymi w sieciach opartych na protokole IP.
+    protokół komunikatów kontrolnych: ICMP (Internet Control Message Protocol) - protokół warstwy sieciowej modelu OSI, wykorzystywany w diagnostyce sieci oraz trasowaniu.
+    przydzielanie adresu: 	wymagana konfiguracja ręczna, przez DHCP lub APIPA
+    mapowanie nazw hostów w DNS: używa rekordów A oraz PTR w domenie IN-ADDR.ARPA
+}
+
+IPv6 {
+    długość adresów: 128 bitów
+    identyfikacja ruchu dla QoS: tak (Flow Label)
+    fragmentacja: jedynie przez nadającego hosta
+    suma kontrolna w nagłówku: nie
+    ramki zgłoszeń: wielopoziomowe wiadomości typu Neighbor Solicitation, brak ARP
+    zarządzania grupami multicastowymi: MLD (ang. Multicast Listener Discovery Protocol)
+    protokół komunikatów kontrolnych: ICMPv6, wymagany
+    mapowanie nazw hostów w DNS: używa rekordów AAAA oraz PTR w domenie IP6.ARPA
+
+}
