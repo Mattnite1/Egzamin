@@ -1,0 +1,33 @@
+Mikroprocesor - Jest on układem cyfrowym taktowanym przez sygnał zegarowy, który realizuje zadany program - ciąg rozkazów umieszczony w pamięci operacyjnej. 
+Program ma zwykle zadanie przetworzenia określonych danych pobranych z pamięci (lub urządzeń zewnętrznych), oraz zapisanie wyników ich przetwarzania, też w pamięci. 
+
+BLOKI:
+- RAM (Random Acces Memory) - pamięć operacyjna
+- BU (Bus Unit) - układ zarządający magistralami
+- AU (Addresing Unit) - układ obliczania adresu                 } JEDEN BLOK 
+- MMU (Memory Management Unit) - układem zarządzania pamięcią   }
+- IU (Instrucion Unit) - dekoder instrukcji
+- EU (Execution Unit) - moduł wykonawczy:
+    - ALU (Aritmetic-Logic Unit) - jednostką arytmetyczno-logiczną
+    - FPU (Floating Point Unit) - jednostka zmiennoprzecinkowa
+
+
+Realizacja programu przez taki układ przebiega następująco:
+
+1. Kod rozkazów jest odczytywany z pamięci RAM i umieszczany w kolejce instrukcji.
+
+2. Poszczególne instrukcje trafiają z kolejki do dekodera IU, który rozkodowuje rozkazy przeznaczone do wykonania. 
+Wykorzystuje przy tym informacje o sposobie kodowania rozkazów zawarte w pamięci stałej ROM umieszczonej w strukturze procesora.
+
+3. Zależnie od rozkazu dekoder często musi wydzielić z kodu instrukcji zawarte w niej argumenty, lub adresy danych, które procesor będzie wykorzystywał. 
+Są one przesyłane odpowiednio do bloku wykonującego instrukcje EU i bloku adresowego AU.
+
+4. Blok adresowy AU i zarządzania pamięcią MMU wypracowuje na tej podstawie odpowiednie sygnały i dane przekazywane do bloku zarządzania magistralami BU. 
+Po wystawieniu adresu na magistrali adresowej generowane są sygnały sterujące, które powodują odczyt danych z pamięci - układ pamięci wystawia dane na magistrali danych.
+
+5. Dane są przekazywane do bloku wykonującego instrukcje lub (jeśli są kodami następnych rozkazów programu do kolejki instrukcji).
+
+6. Blok wykonujący instrukcje EU zawiera jednostkę arytmetyczno-logiczną ALU, która dokonuje porównań lub działań matematycznych na argumentach stałoprzecinkowych. 
+Argumenty zmienno-przecinkowe są przetwarzane w jednostce do tego celu wyspecjalizowanej FPU.
+
+7.Wyniki przetwarzania trzeba często zapisać w pamięci pod określonym adresem - blok wykonujący instrukcje przekazuje odpowiednie dane do bloku zarządzania pamięcią i bloku sterującego magistralami.
