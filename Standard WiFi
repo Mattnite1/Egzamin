@@ -1,0 +1,53 @@
+Wi-Fi 802.11 to grupa standardów sieci bezprzewodowej, które są rozwijane przez stowarzyszenie IEEE oraz firmę Alliance Wi-Fi. 
+
+Standardy WIFI:
+- 802.11 {
+    przepustowość: do 11 Mb/s  
+    maksymalny zasięg: 47 metrów w pomieszczeniach i 98 metrów na wolnej przestrzeni
+    algorytm usuwający zakłócenia
+    liczba obsługiwanych kanałów: 13
+} 
+
+- 802.11 b {
+    przepustowość: do 11 Mb/s,
+    maksymalny zasięg: 47 metrów w pomieszczeniach i 98 metrów na wolnej przestrzeni,
+    algorytm usuwający zakłócenia,
+    liczba obsługiwanych kanałów: 13 (większość nachodzi na siebie)
+}
+
+- 802.11 a {
+    przepustowość: do 54 Mb/s
+    zasięg: znacznie słabszy niż 802.11 b
+    pobór energii: wysoki
+    częstotliwość: 5 GHz
+    liczba obsługiwanych kanałów: 12 (nie pokrywają się)
+}
+
+- 802.11 g {
+    przepustowość: 54 Mb/s
+    zasięg: do 50 metrów w pomieszczeniach i 100 metrów na wolnym terenie
+    liczba obsługiwanych kanałów: 14 (3 się pokrywają)
+    routery 802.11 n działają na częstotliwości 2,4 GHz oraz 5 GHz
+}
+
+- 802.11 n {
+    przepustowość: do 600 Mb/s
+    szerokość kanałów: 20 MHz i 40 MHz
+    maksymalny zasięg: wiele kilometrów (rozległe sieci bezprzewodowe)
+    częstotliwość: 2,4 GHZ i 5 GHz.
+}
+
+- 802.11 ac {
+    przepustowość: do 7 Gb/s
+    zasięg: wiele kilometrów (rozległe sieci bezprzewodowe)
+    szerokość obsługiwanych kanałów: 20 MHz, 40 MHz, 80 MHz lub 160 MHz
+    częstotliwość: 5 GHz
+    obsługiwana technologia MU-MIM
+}
+
+- 802.11 ax {
+    przepustowość: do 600 Mb/s
+    częstotliwości: 2,4 GHz, 5 GHz
+    zasięg: wiele kilometrów (rozległe sieci bezprzewodowe)
+    obsługiwana technologia OFDMA
+}
